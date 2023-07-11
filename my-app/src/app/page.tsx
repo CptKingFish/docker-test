@@ -1,22 +1,29 @@
-"use client";
+async function getData() {
+  let fetchedData = {};
+  try {
+    const data = await fetch("http://flask:80", { cache: "no-store" });
+    fetchedData = await data.json();
+  } catch (err) {
+    fetchedData = {
+      error: err,
+    };
+  } finally {
+    return fetchedData;
+  }
+}
 
-import Image from "next/image";
-import axios from "axios";
+export default async function Home() {
+  let data: {
+    message?: string;
+    error?: string;
+  } = await getData();
 
-import { useState, useEffect } from "react";
-
-export default function Home() {
-  const [data, setData] = useState("");
-
-  useEffect(() => {
-    axios.get("http://127.0.0.1:80").then((res) => setData(res.data));
-  }, []);
+  console.log(data);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-6xl font-bold text-center">{data || ""}</h1>
-        <h1 className="text-6xl font-bold text-center">{data || ""}</h1>
+        <h1 className="text-6xl font-bold text-center">{data.message || ""}</h1>
       </div>
     </main>
   );
