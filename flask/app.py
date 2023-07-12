@@ -7,7 +7,7 @@ CORS(app, resources={r"*": {"origins": "*"}})
 
 @app.route("/")
 def hello():
-    return "Demo Flask & Docker application is up and running!"
+    return {"message": "Hello, World!", "status": 200}
 
 
 if __name__ == "__main__":
