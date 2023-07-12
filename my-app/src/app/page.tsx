@@ -9,7 +9,7 @@ export default function Home() {
   const [data, setData] = useState("");
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:80").then((res) => setData(res.data));
+    axios.get("http://localhost:80").then((res) => setData(res.data));
   }, []);
 
   return (

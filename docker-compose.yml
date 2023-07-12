@@ -1,13 +1,15 @@
 version: "3"
 services:
   flask:
-    image: cptkingfish/flask_test
+    build:
+      context: ./flask
+      dockerfile: Dockerfile
     container_name: flask
     environment:
       - discovery.type=single-node
     ports:
       - 80:80
-  next-js:
+  nextjs:
     build:
       context: ./my-app
       dockerfile: Dockerfile
@@ -19,4 +21,3 @@ services:
       - flask
     ports:
       - 3000:3000
-
