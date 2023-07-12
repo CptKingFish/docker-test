@@ -9,11 +9,11 @@ services:
       - discovery.type=single-node
     ports:
       - 80:80
-  nextjs:
+  next_js:
     build:
       context: ./my-app
       dockerfile: Dockerfile
-    container_name: nextjs
+    container_name: next_js
     restart: always
     environment:
       - DEBUG=True
