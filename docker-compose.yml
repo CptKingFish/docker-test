@@ -1,23 +1,32 @@
 version: "3"
 services:
-  flask:
+  flask_test:
     build:
       context: ./flask
       dockerfile: Dockerfile
-    container_name: flask
-    environment:
-      - discovery.type=single-node
+    image: cptkingfish/flask_test
+    container_name: flask_test
     ports:
-      - 80:80
-  next_js:
+      - 3000:80
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: test-ecs
+    #     awslogs-region: ap-southeast-1
+    #     awslogs-stream-prefix: flask_test
+  nextjs_test:
     build:
       context: ./my-app
       dockerfile: Dockerfile
-    container_name: next_js
-    restart: always
-    environment:
-      - DEBUG=True
+    image: cptkingfish/nextjs_test
+    container_name: nextjs_test
     depends_on:
-      - flask
+      - flask_test
     ports:
-      - 3000:3000
+      - 80:3000
+    # logging:
+    #   driver: awslogs
+    #   options:
+    #     awslogs-group: foodtrucks
+    #     awslogs-region: ap-southeast-1
+    #     awslogs-stream-prefix: nextjs_test
