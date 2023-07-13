@@ -1,12 +1,13 @@
 async function getData() {
   let fetchedData = {};
   try {
-    const data = await fetch("http://localhost:80", { cache: "no-store" });
+    const data = await fetch("http://flask_test:80", { cache: "no-store" });
     fetchedData = await data.json();
   } catch (err) {
     fetchedData = {
       error: err,
     };
+    console.log(fetchedData);
   } finally {
     return fetchedData;
   }
